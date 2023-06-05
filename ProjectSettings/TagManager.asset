@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - projectile
+  - FxTemporaire
+  - LiquidArea
+  - WasteFlask
+  - StockLiquid
+  - PippteGlass
+  - MainFlask
+  - ElectronicPipette
+  - BottleLid
+  - Table
+  - WasteArea
+  - WasteLiquid
+  - LeftHand
+  - RightHand
+  - JointArea
+  - P_JointArea
+  - Bottle_WarningArea
+  - SafetyCabinet
+  - Beaker_BottleGlass
+  - Stock_BottleGlass
+  - Waste_BottleGlass
+  - Button
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
