@@ -6,8 +6,7 @@ using Valve.VR;
 using System.IO;
 
 
-public class GetPosition: MonoBehaviour
-{
+public class GetPosition : MonoBehaviour {
     //HMDの位置座標格納用
     private Vector3 HMDPosition;
     //HMDの回転座標格納用（クォータニオン）
@@ -44,8 +43,7 @@ public class GetPosition: MonoBehaviour
     private int PlayMode; //0:練習、1:模擬試験、2:学習
 
 
-    void Start()
-    {
+    void Start() {
         GameManager = GameObject.Find("GameManager");
         SaveData = GameManager.GetComponent<SaveData>();
         GameMode = GameObject.Find("GameMode");
@@ -55,29 +53,21 @@ public class GetPosition: MonoBehaviour
     }
 
     //1フレーム毎に呼び出されるUpdateメゾット
-    void Update()
-    {
-        time += Time.deltaTime;
+    void Update() {
 
         List<XRNodeState> DevStat = new List<XRNodeState>();
         InputTracking.GetNodeStates(DevStat);
 
-        foreach (XRNodeState s in DevStat)
-        {
-            if (s.nodeType == XRNode.Head)
-            {
+        foreach (XRNodeState s in DevStat) {
+            if (s.nodeType == XRNode.Head) {
                 s.TryGetPosition(out HMDPosition);
                 s.TryGetRotation(out HMDRotationQ);
                 HMDRotation = HMDRotationQ.eulerAngles;
-            }
-            else if (s.nodeType == XRNode.LeftHand)
-            {
+            } else if (s.nodeType == XRNode.LeftHand) {
                 s.TryGetPosition(out LeftHandPosition);
                 s.TryGetRotation(out LeftHandRotationQ);
                 LeftHandRotation = LeftHandRotationQ.eulerAngles;
-            }
-            else if (s.nodeType == XRNode.RightHand)
-            {
+            } else if (s.nodeType == XRNode.RightHand) {
                 s.TryGetPosition(out RightHandPosition);
                 s.TryGetRotation(out RightHandRotationQ);
                 RightHandRotation = RightHandRotationQ.eulerAngles;
@@ -96,13 +86,16 @@ public class GetPosition: MonoBehaviour
                     "RGHR:" + RightHandRotation.x + ", " + RightHandRotation.y + ", " + RightHandRotation.z);
         */
 
-        if (PlayMode == 1)
-        {
+        if (PlayMode == 1) {
             trimmed_time = Timer.GetComponent<TimeManager>().GetTime();
             //取得データをCSVファイルに記述
-            SaveData.SaveCsv(trimmed_time, HMDPosition.x.ToString(), HMDPosition.y.ToString(), HMDPosition.z.ToString(), HMDRotation.x.ToString(), HMDRotation.y.ToString(), HMDRotation.z.ToString(),
-                             LeftHandPosition.x.ToString(), LeftHandPosition.y.ToString(), LeftHandPosition.z.ToString(), LeftHandRotation.x.ToString(), LeftHandRotation.y.ToString(), LeftHandRotation.z.ToString(),
-                             RightHandPosition.x.ToString(), RightHandPosition.y.ToString(), RightHandPosition.z.ToString(), RightHandRotation.x.ToString(), RightHandRotation.y.ToString(), RightHandRotation.z.ToString(),
+            SaveData.SaveCsv(trimmed_time,
+                             HMDPosition.x.ToString(), HMDPosition.y.ToString(), HMDPosition.z.ToString(),
+                             HMDRotationQ.x.ToString(), HMDRotationQ.y.ToString(), HMDRotationQ.z.ToString(), HMDRotationQ.w.ToString(),
+                             LeftHandPosition.x.ToString(), LeftHandPosition.y.ToString(), LeftHandPosition.z.ToString(),
+                             LeftHandRotationQ.x.ToString(), LeftHandRotationQ.y.ToString(), LeftHandRotationQ.z.ToString(), LeftHandRotationQ.w.ToString(),
+                             RightHandPosition.x.ToString(), RightHandPosition.y.ToString(), RightHandPosition.z.ToString(),
+                             RightHandRotationQ.x.ToString(), RightHandRotationQ.y.ToString(), RightHandRotationQ.z.ToString(), RightHandRotationQ.w.ToString(),
                              pull.ToString());
         }
     }

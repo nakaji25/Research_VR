@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ErrorWrite : MonoBehaviour
-{
+public class ErrorWrite : MonoBehaviour {
     private GameObject GameManager;
     private ErrorData ErrorData;
     private GameObject Timer;
@@ -13,8 +12,7 @@ public class ErrorWrite : MonoBehaviour
     private bool touch_pipette = false;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         GameManager = GameObject.Find("GameManager");
         ErrorData = GameManager.GetComponent<ErrorData>();
         Timer = GameObject.Find("Time");
@@ -22,40 +20,30 @@ public class ErrorWrite : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (con_flag && touch_pipette)
-        {
+    void Update() {
+        if (con_flag && touch_pipette) {
             trimmed_time = Timer.GetComponent<TimeManager>().GetTime();
             ErrorData.SaveCsv(trimmed_time, "T", "T");
             con_flag = false;
             touch_pipette = false;
-        }
-        else if (con_flag)
-        {
+        } else if (con_flag) {
             trimmed_time = Timer.GetComponent<TimeManager>().GetTime();
             ErrorData.SaveCsv(trimmed_time, "T", " ");
             con_flag = false;
-        }
-        else if (touch_pipette)
-        {
+        } else if (touch_pipette) {
             trimmed_time = Timer.GetComponent<TimeManager>().GetTime();
             ErrorData.SaveCsv(trimmed_time, " ", "T");
             touch_pipette = false;
-        }
-        /*else
-        {
+        } else {
             trimmed_time = Timer.GetComponent<TimeManager>().GetTime();
             ErrorData.SaveCsv(trimmed_time, " ", " ");
-        }*/
+        }
     }
 
-    public void SetConFlag(bool flag)
-    {
+    public void SetConFlag(bool flag) {
         con_flag = flag;
     }
-    public void SetTouchPipette(bool flag)
-    {
+    public void SetTouchPipette(bool flag) {
         touch_pipette = flag;
     }
 }

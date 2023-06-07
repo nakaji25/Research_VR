@@ -58,7 +58,7 @@ public class AssistTextManager : MonoBehaviour {
         if (finishedTask) {
             trimmed_time = Timer.GetComponent<TimeManager>().GetTime();
             //取得データをCSVファイルに記述
-            SaveData.SaveCsv(trimmed_time, "Task" + afterTask, "Finish", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-");
+            SaveData.SaveCsv(trimmed_time, "Task" + afterTask, "Finish", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-");
             afterTask += 1;
             finishedTask = false;
         }
@@ -79,16 +79,6 @@ public class AssistTextManager : MonoBehaviour {
             assistText.text = "使用済みのガラス管を取り外し捨てて下さい。";
             LiquidTask_flag = false;
         } else if (flaskMedia) {
-            //Beakerの中の培地が古いか新しいか確認
-            if (BeakerLiquidColor == 0) {
-                //Debug.Log("flaskMedia: old");
-                oldmedia = true;
-                newmedia = false;
-            } else if (BeakerLiquidColor == 1) {
-                //Debug.Log("flaskMedia: new");
-                oldmedia = false;
-                newmedia = true;
-            }
             //Debug.Log("flaskMedia: true");
             if ((pipetteJoint != null) && (BeakerJoint == null) && (WasteBeakerJoint == null) && (oldmedia)) {
                 if (afterTask == 1) {
@@ -136,6 +126,16 @@ public class AssistTextManager : MonoBehaviour {
 
     public void BeakerLiquidStatus(int LiquidColor) {
         BeakerLiquidColor = LiquidColor;
+        //Beakerの中の培地が古いか新しいか確認
+        if (BeakerLiquidColor == 0) {
+            //Debug.Log("flaskMedia: old");
+            oldmedia = true;
+            newmedia = false;
+        } else if (BeakerLiquidColor == 1) {
+            //Debug.Log("flaskMedia: new");
+            oldmedia = false;
+            newmedia = true;
+        }
     }
     public void PipetteStatus(bool UsedPipette) {
         used_flag = UsedPipette;

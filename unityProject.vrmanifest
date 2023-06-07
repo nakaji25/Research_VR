@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.research.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\Users\\student\\Desktop\\Nakajima_system\\Nakajima_Jikken\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "C:\\Users\\Nakajima Akihiko\\Unity\\Nakajima_Jikken\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "Research [Testing]"

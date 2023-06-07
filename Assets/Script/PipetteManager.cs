@@ -51,7 +51,7 @@ public class PipetteManager : MonoBehaviour {
     private bool touch_pipette = false;
 
     private GameObject GameMode;
-    private int PlayMode = 2; //0:練習、1:模擬試験、2:学習
+    private int PlayMode; //0:練習、1:模擬試験、2:学習
 
     //デバッグ用
     private GameObject LogText;
@@ -156,7 +156,7 @@ public class PipetteManager : MonoBehaviour {
         //Debug.Log("OnTriggerStay: " + other.gameObject.tag);
 
         // 培地を吸い取る処理
-        if (((other.gameObject.tag == "LiquidArea") || (other.gameObject.tag == "StockLiquid")) && !(pipetteLiquidArray[7].activeSelf)) {
+        if (((other.gameObject.CompareTag("LiquidArea")) || (other.gameObject.CompareTag("StockLiquid"))) && !(pipetteLiquidArray[7].activeSelf)) {
             if (other.gameObject.tag == "LiquidArea") {
                 Area_type = 0;
             } else if (other.gameObject.tag == "StockLiquid") {
@@ -196,8 +196,6 @@ public class PipetteManager : MonoBehaviour {
             }
             if (pull > 0) {
                 counter_flag = true;
-                Debug.Log("pipetteLiquidArea: " + pipetteLiquidArea);
-                Debug.Log("pipetteLiquidArray[pipetteLiquidArea].activeSelf: " + pipetteLiquidArray[pipetteLiquidArea].activeSelf);
                 if (pipetteLiquidArray[pipetteLiquidArea].activeSelf == true && (count <= 0)) {
                     OutputPipetteLiquid(pipetteLiquidArray[pipetteLiquidArea]);
                     if (pipetteLiquidArea == 0) {
@@ -210,11 +208,14 @@ public class PipetteManager : MonoBehaviour {
                             GameObject flask = GameObject.Find("Beaker");
                             flask.GetComponent<FlaskManager>().InputLiuqid(pipetteLiquid.GetComponent<MeshRenderer>().material);
                         }
-                        // Beakerに入った培地が新しいか古いかを確認
-                        if (pipetteLiquid.GetComponent<MeshRenderer>().material == pipetteLiquidColor[0]) {
+                        // Beakerに入った培地が新しいか古いかを確認 
+                        Material LiquidMaterial = pipetteLiquidArray[pipetteLiquidArea].GetComponent<MeshRenderer>().material;
+                        if (LiquidMaterial.name == "Liquid1 (Instance)") {
+                            Debug.Log("oldmedia");
                             AssistText.GetComponent<AssistTextManager>().BeakerLiquidStatus(0);
                             oldPipetteLiquid_flag = false;
-                        } else if (pipetteLiquid.GetComponent<MeshRenderer>().material == pipetteLiquidColor[1]) {
+                        } else if (LiquidMaterial.name == "Liquid2 (Instance)") {
+                            Debug.Log("newmedia");
                             AssistText.GetComponent<AssistTextManager>().BeakerLiquidStatus(1);
                             newPipetteLiquid_flag = false;
                         }
